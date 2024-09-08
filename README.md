@@ -12,11 +12,19 @@
 This is a full-stack project built as part of the **Stellar Fullstack Bootcamp**. The project demonstrates how to integrate a web application with the **Stellar blockchain** network. The app allows users to create and connect Stellar wallets, send payments, view transactions, and interact with the Stellar blockchain via the Freighter wallet and Horizon API.
 
 ## Features
-
 - **Create New Wallet**: Generate a new Stellar wallet using Stellar's test network and fund it via the Friendbot service.
+
+https://github.com/user-attachments/assets/ba6cf16f-babb-41ed-90fc-6813fd75c022
+
 - **Connect to Existing Wallet**: Use an existing Stellar wallet by entering a public and secret key or connect to the Freighter wallet.
+
+https://github.com/user-attachments/assets/535a0432-6994-4d2e-91ab-edaae2f8ed75
 - **Send Payments**: Send Stellar Lumens (XLM) to other Stellar accounts. Supports single and multiple recipient transactions.
+
+https://github.com/user-attachments/assets/d55b661f-1bc9-4b03-9f01-cbe73ce6651a
 - **View Transactions**: Display recent transactions (payments and other operations) for the connected wallet.
+
+https://github.com/user-attachments/assets/0d971a96-16e8-4075-b132-c5545416c9c1
 - **Transaction Memos**: Send transaction memos along with payments.
 
 ## Technologies
