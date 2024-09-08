@@ -228,7 +228,7 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
       <hr />
       <h4>Send Funds</h4>
       <textarea
-        placeholder="Enter a message (optional)"
+        placeholder="Enter a message (optional) (Max 28 characters)"
         value={destination.message || ""}
         onChange={(e) => setDestination({ ...destination, message: e.target.value })}
         rows="4"
