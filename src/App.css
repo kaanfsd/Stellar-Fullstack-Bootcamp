@@ -1,0 +1,329 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&display=swap');
+
+*, *:after, *:before {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: "Lexend", sans-serif;
+	line-height: 1.5;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #393232;
+}
+
+/* Kartlar ve Butonlar Arasında Boşluk Eklemek için */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Kartlar ve butonlar arasında boşluk */
+  align-items: center; /* Ortalamak için */
+  margin-top: 20px;
+}
+
+.card-list {
+	width: 90%;
+	max-width: 400px;
+  gap: 15px; /* Kartlar arasındaki boşluk */
+}
+
+.card {
+	background-color: #FFF;
+	box-shadow: 0 0 0 1px rgba(0, 0, 0, .05), 0 20px 50px 0 rgba(0, 0, 0, .1);
+	border-radius: 15px;
+	overflow: hidden;
+	padding: 1rem; /* Kartın genel padding'ini azalttık */
+	position: relative;
+	transition: .15s ease-in;
+  margin-bottom: 20px; /* Kartlar arasında boşluk */
+	
+	&:hover, &:focus-within {
+		box-shadow: 0 0 0 2px #16C79A, 0 10px 60px 0 rgba(0, 0, 0, .1);
+		transform: translateY(-5px);
+	}
+}
+
+.card-header {
+	margin-top: 1rem; /* Başlıkla diğer elemanlar arasındaki boşluğu azalttık */
+	display: flex;
+  margin-bottom: 10px;
+	align-items: center;
+	justify-content: space-between;
+	a {
+		font-weight: 300;
+		font-size: 1.25rem; /* Başlığın boyutunu biraz küçülttük */
+		line-height: 1.25;
+		padding-right: 0.75rem; /* Sağdaki boşluğu azalttık */
+		text-decoration: none;
+		color: inherit;
+		will-change: transform;
+		&:after {
+			content: "";
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+		}
+	}
+	
+}
+
+.card-footer {
+	margin-top: 1rem; /* Üst kısımdaki boşluğu azalttık */
+	border-top: 1px solid #ddd;
+	padding-top: 1rem; /* Üst kısımdaki padding'i azalttık */
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.card-meta {	
+	display: flex;
+	align-items: center;
+	color: #787878;
+	&:first-child:after {
+		display: block;
+		content: "";
+		width: 4px;
+		height: 4px;
+		border-radius: 50%;
+		background-color: currentcolor;
+		margin-left: 0.5rem; /* Nokta ile metin arasındaki boşluğu azalttık */
+		margin-right: 0.5rem; /* Nokta ile metin arasındaki boşluğu azalttık */
+	}
+}
+
+/* Buton Stili */
+.button {
+  background-color: #16C79A; /* Butonun arka plan rengi */
+  color: #fff; /* Yazı rengi */
+  padding: 10px 20px; /* İç boşluklar */
+  border: none; /* Kenarlık yok */
+  border-radius: 8px; /* Köşeleri yuvarlatma */
+  font-size: 1rem; /* Yazı boyutu */
+  font-weight: 600; /* Yazı kalınlığı */
+  cursor: pointer; /* İmleç hoverda değişsin */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Renk ve hareket animasyonu */
+  margin-top: 10px; /* Butonlar arasında boşluk */
+  margin-right: 10px; /* Yan yana butonlar arasında boşluk */
+}
+
+.button:hover, .button:focus {
+  background-color: #13A481; /* Hover ve focus sırasında arka plan rengi */
+  transform: translateY(-2px); /* Hover sırasında hafif yukarı hareket */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Hover sırasında gölgeyi güçlendir */
+}
+
+.button:active {
+  transform: translateY(0); /* Butona basıldığında normale dönme */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Butona basıldığında gölge azalır */
+}
+
+.button:disabled {
+  background-color: #cccccc; /* Disabled buton rengi */
+  color: #666666; /* Disabled yazı rengi */
+  cursor: not-allowed; /* Disabled durumunda imleç değişimi */
+  box-shadow: none; /* Disabled durumda gölge yok */
+}
+
+/* Input ve Textarea Genel Stilleri */
+.input-field, .input-message {
+  width: 100%; /* Genişlik tam olur */
+  padding: 10px 15px; /* İç boşluklar */
+  margin-top: 10px; /* Üst boşluk */
+  font-size: 1rem; /* Yazı boyutu */
+  border: 1px solid #ccc; /* Kenarlık rengi */
+  border-radius: 8px; /* Köşeler yuvarlatılır */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Geçiş efekti */
+}
+
+/* Input ve Textarea Odaklanıldığında (Focus) */
+.input-field:focus, .input-message:focus {
+  border-color: #16C79A; /* Odaklanıldığında kenarlık rengi */
+  box-shadow: 0 0 5px rgba(22, 199, 154, 0.5); /* Odaklanıldığında gölge rengi */
+  outline: none; /* Varsayılan odak halkasını kaldırma */
+}
+
+/* Textarea Stili */
+.input-message {
+	min-height: 120px; /* Textarea minimum yüksekliği */
+	resize: vertical; /* Yalnızca dikey boyutlandırmaya izin ver */
+	font-family: "Lexend", sans-serif; /* Font ailesini burada belirtiyoruz */
+	font-size: 1rem; /* Font boyutu */
+	color: #333; /* Metin rengi */
+	padding: 10px 15px; /* İç boşluk */
+	margin-top: 10px; /* Üst boşluk */
+	border: 1px solid #ccc; /* Kenarlık rengi */
+	border-radius: 8px; /* Köşeleri yuvarla */
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Hafif gölge */
+	transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-message::placeholder {
+	color: #999; /* Placeholder yazı rengi */
+	font-size: 0.9rem; /* Placeholder yazı boyutu */
+	font-family: "Lexend", sans-serif; /* Placeholder yazısı için de font */
+  }
+
+/* Input İçindeki Placeholder */
+.input-field::placeholder, .input-message::placeholder {
+  color: #999; /* Placeholder yazı rengi */
+  font-size: 0.9rem; /* Placeholder yazı boyutu */
+}
+
+.input-message:focus {
+	border-color: #16C79A; /* Odaklanıldığında kenarlık rengi */
+	box-shadow: 0 0 5px rgba(22, 199, 154, 0.5); /* Odaklanıldığında gölge */
+	outline: none; /* Varsayılan odak halkasını kaldır */
+  }
+
+/* Disabled (Devre Dışı) Input ve Textarea */
+.input-field:disabled, .input-message:disabled {
+  background-color: #f4f4f4; /* Devre dışı bırakıldığında arka plan */
+  color: #666; /* Devre dışı bırakıldığında yazı rengi */
+  cursor: not-allowed; /* İmleç devre dışı */
+}
+
+/* Genel input alanı */
+.tag-input {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	border: 1px solid #ccc;
+	padding: 10px;
+	width: 100%;
+	min-height: 40px;
+	cursor: text;
+	border-radius: 8px;
+	background-color: #f9f9f9;
+	box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+	transition: border-color 0.3s ease;
+  }
+  
+  /* Etiketlerin gösterildiği div */
+  .tag-input div {
+	margin-right: 8px;
+	margin-bottom: 5px; /* Flex-wrap olduğu için alt kısımdaki boşluk */
+  }
+  
+  /* Etiketlerin tasarımı */
+  .tag {
+	background-color: #e0e0e0;
+	border-radius: 20px;
+	padding: 8px 12px;
+	display: inline-flex;
+	align-items: center;
+	font-size: 14px;
+	color: #333;
+	box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+	transition: width 0.3s ease, padding 0.3s ease; /* Hover durumunda animasyon */
+	max-width: 120px; /* Başlangıçta genişliği sınırlayalım */
+	overflow: hidden; /* Taşma olmasın */
+	white-space: nowrap; /* Tek satırda gösterelim */
+	text-overflow: ellipsis; /* Kısaltmayı gösterelim */
+  }
+  
+  /* Çarpı işareti (silme butonu) */
+  .tag .remove {
+	margin-left: 8px;
+	cursor: pointer;
+	font-weight: bold;
+	color: #ff4d4d; /* Silme butonunun rengi */
+	font-size: 14px;
+	transition: color 0.2s ease;
+  }
+  
+  .tag .remove:hover {
+	color: #ff1a1a; /* Hover sırasında silme işaretinin rengi */
+  }
+  
+  /* Focus durumunda input alanının kenarlık rengi */
+.tag-input:focus-within {
+	border-color: #16C79A;
+  }
+
+/* Switch container için stil */
+.switch-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+  }
+  
+  /* Switch'in kendisi için stil */
+  .switch {
+	position: relative;
+	display: inline-block;
+	width: 60px;
+	height: 30px;
+  }
+  
+  /* Switch için input alanını gizliyoruz */
+  .switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+  }
+  
+  /* Slider için stil */
+  .slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #ccc;
+	transition: 0.4s;
+	border-radius: 34px;
+  }
+  
+  .slider:before {
+	position: absolute;
+	content: "";
+	height: 26px;
+	width: 26px;
+	left: 4px;
+	bottom: 2px;
+	background-color: white;
+	transition: 0.4s;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Switch açıkken (checked) stil */
+  input:checked + .slider {
+	background-color: #4CAF50;
+  }
+  
+  input:checked + .slider:before {
+	transform: translateX(30px);
+  }
+  
+  /* Hover etkisi */
+  .slider:hover {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Açma/Kapama yazıları için */
+  .switch-container p {
+	margin: 0;
+	font-size: 16px;
+	color: #333;
+  }
+  .logo-container {
+	display: flex;
+	justify-content: flex-start; /* Sola yaslar */
+	margin-bottom: 20px;
+  }
+  
+  .logo {
+	max-width: 200px;  /* Maksimum genişlik */
+	height: auto;      /* Yüksekliği otomatik ayarla */
+  }
+  
+  
