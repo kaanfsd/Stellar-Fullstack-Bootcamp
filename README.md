@@ -52,7 +52,6 @@ This is a full-stack project built as part of the **Stellar Fullstack Bootcamp**
    ```bash
    npm start
 
-asd
 ## Usage
 
 ### Create a New Wallet
