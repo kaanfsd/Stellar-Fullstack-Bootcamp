@@ -1,5 +1,13 @@
 # Stellar Fullstack Bootcamp
 
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://raw.githubusercontent.com/kaanfsd/Stellar-Fullstack-Bootcamp/public/1.png" alt="Spelling Bee 1" width="400"/>
+    <img src="https://raw.githubusercontent.com/kaanfsd/Spelling-Bee/main/UI2.png" alt="Spelling Bee 2" height="325" width="400"/>
+    <img src="https://raw.githubusercontent.com/kaanfsd/Spelling-Bee/main/UI3.png" alt="Spelling Bee 3" width="400"/>
+    <img src="https://raw.githubusercontent.com/kaanfsd/Spelling-Bee/main/UI4.png" alt="Spelling Bee 4" height="335" width="400"/>
+</div>
+
 This is a full-stack project built as part of the **Stellar Fullstack Bootcamp**. The project demonstrates how to integrate a web application with the **Stellar blockchain** network. The app allows users to create and connect Stellar wallets, send payments, view transactions, and interact with the Stellar blockchain via the Freighter wallet and Horizon API.
 
 ## Features
