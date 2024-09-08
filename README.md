@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# Stellar Fullstack Bootcamp
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a full-stack project built as part of the **Stellar Fullstack Bootcamp**. The project demonstrates how to integrate a web application with the **Stellar blockchain** network. The app allows users to create and connect Stellar wallets, send payments, view transactions, and interact with the Stellar blockchain via the Freighter wallet and Horizon API.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Create New Wallet**: Generate a new Stellar wallet using Stellar's test network and fund it via the Friendbot service.
+- **Connect to Existing Wallet**: Use an existing Stellar wallet by entering a public and secret key or connect to the Freighter wallet.
+- **Send Payments**: Send Stellar Lumens (XLM) to other Stellar accounts. Supports single and multiple recipient transactions.
+- **View Transactions**: Display recent transactions (payments and other operations) for the connected wallet.
+- **Transaction Memos**: Send transaction memos along with payments.
 
-### `npm start`
+## Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend**: React.js (JavaScript, JSX, CSS)
+- **Blockchain**: Stellar (Horizon API, Freighter Wallet, Stellar SDK)
+- **Styling**: Custom CSS with responsive design
+- **API**: Fetching data using Stellar Horizon Testnet API
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Prerequisites
+- Node.js (>=14.x) and npm (>=6.x) installed on your machine.
+- npm install @stellar/stellar-sdk install the stellar sdk.
 
-### `npm test`
+  ### Steps
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. **Clone the Repository**:
 
-### `npm run build`
+   ```bash
+   git clone https://github.com/your-username/stellar-fullstack-bootcamp.git
+   cd wallet-project
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. **Install Dependencies**:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+   ```bash
+   git clone https://github.com/your-username/stellar-fullstack-bootcamp.git
+   cd wallet-project
+   npm install
+   npm install @stellar/stellar-sdk
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. **Start the Application**:
 
-### `npm run eject`
+   ```bash
+   npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+asd
+## Usage
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Create a New Wallet
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. Click on the **Create Wallet** button to generate a new Stellar wallet.
+2. The app will create a wallet using Stellar's Friendbot service and display the wallet's public and secret keys.
+3. The newly created wallet will be funded with test XLM on the Stellar Testnet.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Connect an Existing Wallet
 
-## Learn More
+1. To use an existing wallet, enter the **Public Key** and **Secret Key** in the provided input fields.
+2. Click **Use Wallet** to load the wallet and view account details and transactions.
+3. Alternatively, click on **Connect Freighter Wallet** to securely connect using the Freighter browser extension.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Send Payments
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Once connected, enter a **Recipient Public Key** and the **Amount** of XLM to send.
+2. You can optionally add a **Memo** to the transaction.
+3. Click **Send Funds** to send the payment. The transaction will be submitted to the Stellar network.
+4. To send funds to multiple recipients, enter multiple public keys (one at a time) and click **Send Multiple Funds**.
 
-### Code Splitting
+### View Transactions
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. The **Transactions** section will display the 10 most recent transactions for the connected wallet.
+2. Transaction details include the recipient, amount, timestamp, and any memos attached to the transaction.
 
-### Analyzing the Bundle Size
+### Stellar SDK & API Usage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- The app interacts with Stellar's blockchain using the **Stellar SDK** and **Horizon Testnet API**.
+- Wallet creation, balance checks, payments, and other operations are done using the following:
+  - **Stellar SDK** for creating and signing transactions.
+  - **Horizon API** for querying accounts and submitting transactions.
 
-### Making a Progressive Web App
+### File Structure
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+  ```bash
+     npm start
+  ├── public
+  │   └── stellarlogo.png          # Stellar logo for branding
+  ├── src
+  │   ├── Account.jsx              # React component for viewing account and transactions
+  │   ├── App.jsx                  # Main entry point
+  │   ├── MultipleFunds.jsx        # Component for handling multiple payments
+  │   ├── stellar.js               # Stellar SDK integration
+  │   └── index.js                 # ReactDOM render entry point
+  ├── package.json                 # NPM package dependencies
+  └── README.md                    # This README file
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
