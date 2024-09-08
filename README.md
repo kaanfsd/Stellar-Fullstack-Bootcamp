@@ -5,7 +5,6 @@
 
 <div style="display: flex; justify-content: space-between;">
     <img src="https://github.com/kaanfsd/Stellar-Fullstack-Bootcamp/blob/main/public/1.png?raw=true" alt="Wallet1" width="600"/>
-    <img src="https://github.com/kaanfsd/Stellar-Fullstack-Bootcamp/blob/main/public/2.png?raw=true" alt="Wallet2" width="600"/>
     <img src="https://github.com/kaanfsd/Stellar-Fullstack-Bootcamp/blob/main/public/3.png?raw=true" alt="Wallet3" width="600"/>
     <img src="https://github.com/kaanfsd/Stellar-Fullstack-Bootcamp/blob/main/public/4.png?raw=true" alt="Wallet4" width="600"/>
 </div>
