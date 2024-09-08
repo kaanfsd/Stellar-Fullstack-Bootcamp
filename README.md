@@ -37,13 +37,11 @@ This is a full-stack project built as part of the **Stellar Fullstack Bootcamp**
 
    ```bash
    git clone https://github.com/kaanfsd/stellar-fullstack-bootcamp.git
-   cd wallet-project
 
 2. **Install Dependencies**:
 
    ```bash
    git clone https://github.com/kaanfsd/stellar-fullstack-bootcamp.git
-   cd wallet-project
    npm install
    npm install @stellar/stellar-sdk
 
