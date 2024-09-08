@@ -92,7 +92,6 @@ This is a full-stack project built as part of the **Stellar Fullstack Bootcamp**
   ├── src
   │   ├── Account.jsx              # React component for viewing account and transactions
   │   ├── App.jsx                  # Main entry point
-  │   ├── MultipleFunds.jsx        # Component for handling multiple payments
   │   ├── stellar.js               # Stellar SDK integration
   │   └── index.js                 # ReactDOM render entry point
   ├── package.json                 # NPM package dependencies
