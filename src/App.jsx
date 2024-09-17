@@ -35,8 +35,8 @@ const App = () => {
   };
 
   const handleGoBack = () => {
-    setShowAccount(false);  // Geri dön ve cüzdan detaylarını gösterme
-    setWallet({ publicKey: "", secretKey: "" });  // Cüzdan bilgilerini temizle
+    setShowAccount(false);  
+    setWallet({ publicKey: "", secretKey: "" });  
   };
 
   return (
