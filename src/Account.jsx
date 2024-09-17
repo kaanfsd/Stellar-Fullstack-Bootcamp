@@ -7,8 +7,8 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
   const [transactions, setTransactions] = useState([]);
   const [destination, setDestination] = useState({ id: "", amount: "" });
   const [loading, setLoading] = useState(false);
-  const [tags, setTags] = useState([]);  // Etiketler için state
-  const [isSwitchOn, setIsSwitchOn] = useState(false); // Switch butonunun durumu
+  const [tags, setTags] = useState([]);  
+  const [isSwitchOn, setIsSwitchOn] = useState(false); 
 
   useEffect(() => {
     const loadAccountData = async () => {
@@ -27,12 +27,12 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
   useEffect(() => {
     const loadPaymentsAndTransactions = async () => {
       try {
-        const payments = await fetchPayments(publicKey); // Ödeme işlemlerini getir
-        const transactions = await fetchTransactions(publicKey); // Diğer işlemleri getir
+        const payments = await fetchPayments(publicKey); 
+        const transactions = await fetchTransactions(publicKey); 
         const allTransactions = [...payments.sentPayments, ...transactions];
         
         const paymentTransactions = allTransactions.filter(transaction => transaction.type === "payment");
-        setTransactions(paymentTransactions);  // Tüm işlemleri birleştir ve state'e ata
+        setTransactions(paymentTransactions);  
       } catch (error) {
         console.error("Failed to load transactions and payments:", error);
       }
@@ -45,26 +45,26 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
   const changeToFrom = async () => {
     if (isSwitchOn) {
       try {
-        const payments = await fetchPayments(publicKey); // Ödeme işlemlerini getir
-        const transactions = await fetchTransactions(publicKey); // Diğer işlemleri getir
+        const payments = await fetchPayments(publicKey); 
+        const transactions = await fetchTransactions(publicKey); 
         const allTransactions = [...payments.sentPayments, ...transactions];
 
         const paymentTransactions = allTransactions.filter(transaction => transaction.type === "payment");
         
-        setTransactions(paymentTransactions);  // Tüm işlemleri birleştir ve state'e ata
+        setTransactions(paymentTransactions);  
       } catch (error) {
         console.error("Failed to load transactions and payments:", error);
       }
     }else {
       try {
 
-        const payments = await fetchPayments(publicKey); // Ödeme işlemlerini getir
-        const transactions = await fetchTransactions(publicKey); // Diğer işlemleri getir
+        const payments = await fetchPayments(publicKey); 
+        const transactions = await fetchTransactions(publicKey); 
         const allTransactions = [ ...payments.receivedPayments, ...transactions];
 
         const receivedTransactions = allTransactions.filter(transaction => transaction.type === "payment");
         
-        setTransactions(receivedTransactions);  // Tüm işlemleri birleştir ve state'e ata
+        setTransactions(receivedTransactions);  
       } catch (error) {
         console.error("Failed to load transactions and payments:", error);
       }
@@ -74,13 +74,13 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
 
   const loadAccountSentTransactions = async() => {
     try {
-      const payments = await fetchPayments(publicKey); // Ödeme işlemlerini getir
-      const transactions = await fetchTransactions(publicKey); // Diğer işlemleri getir
+      const payments = await fetchPayments(publicKey); 
+      const transactions = await fetchTransactions(publicKey); 
       const allTransactions = [...payments.sentPayments, ...transactions];
 
       const paymentTransactions = allTransactions.filter(transaction => transaction.type === "payment");
       
-      setTransactions(paymentTransactions);  // Tüm işlemleri birleştir ve state'e ata
+      setTransactions(paymentTransactions);  
     } catch (error) {
       console.error("Failed to load transactions and payments:", error);
     }
@@ -111,8 +111,7 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
       await sendFunds(destination.id, secretKey, destination.amount, destination.message);
       alert("Funds sent successfully!");
       fetchTransactions(publicKey);
-      // setTransactions([...transactions, newTransaction]);
-      await loadAccountData(); // Hesap verilerini güncelle
+      await loadAccountData(); 
       await loadAccountSentTransactions()
 
     } catch (error) {
@@ -128,33 +127,33 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
       event.preventDefault();
       const value = event.target.value.trim();
       if (value && !tags.includes(value)) {
-        setTags([...tags, value]);  // Yeni etiketi ekle
-        setDestination({ ...destination, id: value });  // destination.id güncellenir
-        event.target.value = '';  // Input alanını temizle
+        setTags([...tags, value]);  
+        setDestination({ ...destination, id: value });  
+        event.target.value = '';  
       }
     }
   };
 
-  // Switch handler fonksiyonu
+  
   const handleSwitchToggle = () => {
-    setIsSwitchOn((prev) => !prev); // Switch state'ini değiştir
+    setIsSwitchOn((prev) => !prev); 
     changeToFrom();
 
   };
 
 
   const handleSendMultiFunds2 = async (e) => {
-    //e.preventDefault();  // Form submit davranışını engelliyoruz (bunu kaldırmıştınız ama tekrar ekledim)
+    
     setLoading(true);
     
     try {
-      // tags'deki her değeri recipients array'ine ekle
+      
       const recipients = tags.map((tag) => ({
         destinationID: tag,
-        amount: destination.amount  // Burada her tag için amount aynı olarak kullanılıyor
+        amount: destination.amount  
       }));
       
-      // sendMultiFunds fonksiyonuna recipients dizisini gönderiyoruz
+      
       await sendMultiFunds(recipients, secretKey, destination.message);
   
       alert("Funds sent successfully to multiple recipients!");
@@ -165,36 +164,36 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
         message: destination.message || "No message"
       }));
       
-      // Yeni işlemleri mevcut transactions array'ine ekleyin
+      
       
       setTransactions([...transactions, ...newTransactions]);
-      fetchTransactions(publicKey); // İşlem sonrası güncel verileri çek
+      fetchTransactions(publicKey); 
       await loadAccountSentTransactions();
       await loadAccountData();
     } catch (error) {
       console.error("Failed to send funds to multiple recipients:", error);
       alert("Failed to send funds. See console for details.");
     } finally {
-      setLoading(false); // İşlem tamamlandığında loading'i false yap
+      setLoading(false); 
     }
   };
   
 
-  // Etiket ekleme fonksiyonu
+  
   const handleKeyDown = (event) => {
     if (event.key === "Enter") {
       event.preventDefault();
       const value = event.target.value.trim();
       if (value && !tags.includes(value)) {
-        setTags([...tags, value]);  // Yeni etiketi ekle
-        event.target.value = '';  // Input alanını temizle
+        setTags([...tags, value]);  
+        event.target.value = '';  
       }
     }
   };
 
 
   const removeTag = (tagToRemove) => {
-    setTags(tags.filter((tag) => tag !== tagToRemove));  // Etiketin değerine göre filtrele
+    setTags(tags.filter((tag) => tag !== tagToRemove));  
   };
 
 
@@ -202,7 +201,7 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
     if (tag.length > 8) {
       return `${tag.substring(0, 4)}...${tag.substring(tag.length - 4)}`;
     }
-    return tag; // Eğer string zaten çok kısaysa, direkt döndürüyoruz
+    return tag; 
   };
   
   
@@ -239,9 +238,9 @@ const Account = ({ publicKey, secretKey , onGoBack }) => {
       <form onSubmit={(e) => {
     e.preventDefault();
     if (tags.length === 1) {
-      handleSendFunds();  // Eğer sadece bir etiket varsa
+      handleSendFunds();  
     } else if (tags.length > 1) {
-      handleSendMultiFunds2();  // Birden fazla etiket varsa
+      handleSendMultiFunds2();  
     }
   }}>
       <div className="tag-input">
