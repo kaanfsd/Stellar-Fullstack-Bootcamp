@@ -1,6 +1,5 @@
 import * as StellarSdk from "@stellar/stellar-sdk";
 
-// Set up the Stellar server for the testnet
 const server = new StellarSdk.Horizon.Server(
   "https://horizon-testnet.stellar.org"
 );
@@ -22,12 +21,11 @@ export const fetchTransactions = async (publicKey) => {
 };
 
 export async function createAndFundWallet() {
-  const pair = StellarSdk.Keypair.random(); // Generate a random pair of public and secret keys
-  const publicKey = pair.publicKey(); // Extract the public key
-  const secretKey = pair.secret(); // Extract the secret key
+  const pair = StellarSdk.Keypair.random(); 
+  const publicKey = pair.publicKey(); 
+  const secretKey = pair.secret(); 
 
   try {
-    // Fund the new account using Friendbot
     const response = await fetch(
       `https://friendbot.stellar.org?addr=${encodeURIComponent(publicKey)}`
     );
@@ -51,7 +49,7 @@ export async function getAccount(publicKey) {
 }
 
 export async function sendFunds(destinationID, secretKey, amount, message) {
-  const sourceKeys = StellarSdk.Keypair.fromSecret(secretKey); // Generate keypair from secret key
+  const sourceKeys = StellarSdk.Keypair.fromSecret(secretKey); 
   let transaction;
 
   return server
@@ -91,19 +89,19 @@ export async function sendFunds(destinationID, secretKey, amount, message) {
 }
 
 export async function sendFundsToMultiple(recipients, secretKey, amount) {
-  const sourceKeys = StellarSdk.Keypair.fromSecret(secretKey); // Generate keypair from secret key
+  const sourceKeys = StellarSdk.Keypair.fromSecret(secretKey); 
 
   try {
-    // Kaynağın (gönderen) hesabını yüklüyoruz
+    
     const sourceAccount = await server.loadAccount(sourceKeys.publicKey());
 
-    // Her bir alıcıya işlem yapacağız
+    
     for (const destinationID of recipients) {
       try {
-        // Her alıcının hesabını kontrol ediyoruz
+        
         await server.loadAccount(destinationID);
 
-        // İşlemi oluşturuyoruz
+        
         const transaction = new StellarSdk.TransactionBuilder(sourceAccount, {
           fee: StellarSdk.BASE_FEE,
           networkPassphrase: StellarSdk.Networks.TESTNET,
@@ -112,15 +110,15 @@ export async function sendFundsToMultiple(recipients, secretKey, amount) {
             StellarSdk.Operation.payment({
               destination: destinationID,
               asset: StellarSdk.Asset.native(),
-              amount: amount.toString(), // Sabit miktar
+              amount: amount.toString(), 
             })
           )
           .addMemo(StellarSdk.Memo.text("Multi-account Transaction"))
           .setTimeout(180)
           .build();
 
-        transaction.sign(sourceKeys); // İşlemi imzala
-        const result = await server.submitTransaction(transaction); // İşlemi gönder
+        transaction.sign(sourceKeys); 
+        const result = await server.submitTransaction(transaction); 
 
         console.log(`Transaction to ${destinationID} was successful`, result);
       } catch (error) {
@@ -147,7 +145,6 @@ export async function sendMultiFunds2(recipients, secretKey) {
     for (const recipient of recipients) {
       const { destinationID, amount } = recipient;
 
-      // Her alıcıya tek tek sendFunds fonksiyonu ile ödeme yapıyoruz
       await sendFunds(destinationID, secretKey, amount);
     }
 
@@ -159,9 +156,8 @@ export async function sendMultiFunds2(recipients, secretKey) {
   }
 }
 
-// SONRADAN EKLENDİ
 export async function sendMultiFunds(recipients, secretKey, message) {
-  const sourceKeys = StellarSdk.Keypair.fromSecret(secretKey); // Generate keypair from secret key
+  const sourceKeys = StellarSdk.Keypair.fromSecret(secretKey); 
   let transaction;
 
   return server
@@ -175,7 +171,6 @@ export async function sendMultiFunds(recipients, secretKey, message) {
         }
       );
 
-      // Her bir alıcıya ödeme ekle
       recipients.forEach((recipient) => {
         const { destinationID, amount } = recipient;
 
@@ -188,14 +183,14 @@ export async function sendMultiFunds(recipients, secretKey, message) {
         );
       });
 
-      // İşlem inşası
+      
       transaction = transactionBuilder
         .addMemo(StellarSdk.Memo.text(message || "Multi Transaction"))
         .setTimeout(180)
         .build();
 
-      transaction.sign(sourceKeys); // İşlemi imzala
-      return server.submitTransaction(transaction); // İşlemi gönder
+      transaction.sign(sourceKeys); 
+      return server.submitTransaction(transaction); 
     })
     .then((result) => result)
     .catch((error) => {
@@ -207,8 +202,8 @@ export async function sendMultiFunds(recipients, secretKey, message) {
 export const fetchAllTransactionsAndPayments = async (publicKey) => {
   try {
     const [paymentsResponse, transactionsResponse] = await Promise.all([
-      server.operations().forAccount(publicKey).limit(10).call(), // Ödeme operasyonları
-      server.transactions().forAccount(publicKey).limit(10).call(), // Tüm işlemler
+      server.operations().forAccount(publicKey).limit(10).call(), 
+      server.transactions().forAccount(publicKey).limit(10).call(), 
     ]);
 
     const payments = paymentsResponse.records;
@@ -216,45 +211,13 @@ export const fetchAllTransactionsAndPayments = async (publicKey) => {
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
       .slice(0, 10);
 
-    return [...payments, ...transactions]; // İkisini birleştir
+    return [...payments, ...transactions]; 
   } catch (error) {
     console.error("Error fetching transactions and payments:", error);
     return [];
   }
 };
 
-// export async function fetchPayments(accountId) {
-//   try {
-//     const response = await fetch(
-//       `https://horizon-testnet.stellar.org/accounts/${accountId}/operations`
-//     );
-//     const data = await response.json();
-
-//     const payments = data._embedded.records.map((op) => ({
-//       type: op.type,
-//       amount: op.amount,
-//       asset:
-//         op.asset_type === "native"
-//           ? "lumens"
-//           : `${op.asset_code}:${op.asset_issuer}`,
-//       from: op.from,
-//       to: op.to,
-//       timestamp: op.created_at,
-//     }));
-
-//     const sentPayments = payments.filter(
-//       (payment) => payment.from === accountId
-//     );
-//     const receivedPayments = payments.filter(
-//       (payment) => payment.to === accountId
-//     );
-
-//     return { sentPayments, receivedPayments };
-//   } catch (error) {
-//     console.error("Error fetching payments:", error);
-//     return { sentPayments: [], receivedPayments: [] };
-//   }
-// }
 
 export async function fetchPayments(accountId) {
   try {
@@ -263,10 +226,9 @@ export async function fetchPayments(accountId) {
     );
     const data = await response.json();
 
-    // Ödemeleri işleyelim
+    
     const payments = await Promise.all(
       data._embedded.records.map(async (op) => {
-        // İlgili transaction'ı almak için işlemi çekiyoruz
         const transaction = await fetch(op._links.transaction.href);
         const transactionData = await transaction.json();
 
@@ -280,7 +242,7 @@ export async function fetchPayments(accountId) {
           from: op.from,
           to: op.to,
           timestamp: op.created_at,
-          memo: transactionData.memo, // İşlemden gelen memoyu ekliyoruz
+          memo: transactionData.memo, 
         };
       })
     );
