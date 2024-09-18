@@ -76,7 +76,7 @@ export async function sendFunds(destinationID, secretKey, amount, message) {
             amount: amount.toString(),
           })
         )
-        .addMemo(StellarSdk.Memo.text(message))
+        .addMemo(StellarSdk.Memo.text(message || "Transaction"))
         .setTimeout(180)
         .build();
       transaction.sign(sourceKeys);
@@ -190,7 +190,7 @@ export async function sendMultiFunds(recipients, secretKey, message) {
 
       // İşlem inşası
       transaction = transactionBuilder
-        .addMemo(StellarSdk.Memo.text(message))
+        .addMemo(StellarSdk.Memo.text(message || "Multi Transaction"))
         .setTimeout(180)
         .build();
 
