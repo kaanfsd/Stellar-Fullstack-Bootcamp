@@ -55,6 +55,7 @@ https://github.com/user-attachments/assets/0d971a96-16e8-4075-b132-c5545416c9c1
 3. **Start the Application**:
 
    ```bash
+   cd Stellar-Fullstack-Bootcamp
    npm start
 
 ## Usage
