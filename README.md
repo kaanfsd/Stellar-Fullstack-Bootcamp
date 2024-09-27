@@ -70,7 +70,7 @@ https://github.com/user-attachments/assets/0d971a96-16e8-4075-b132-c5545416c9c1
 
 1. To use an existing wallet, enter the **Public Key** and **Secret Key** in the provided input fields.
 2. Click **Use Wallet** to load the wallet and view account details and transactions.
-3. Alternatively, click on **Connect Freighter Wallet** to securely connect using the Freighter browser extension.
+3. Alternatively, click on **Connect Freighter Wallet** to securely connect using the Freighter browser extension. (IN PROGRESS)
 
 ### Send Payments
 
